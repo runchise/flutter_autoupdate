@@ -66,7 +66,7 @@ class UpdateResult {
 
   factory UpdateResult.fromJson(Map<String, dynamic> json) {
     var version = json["version"];
-    var url = json["downloadUrl"];
+    var url = json["url"];
     var rNotes = json["releaseNotes"];
     var rDate = json["releaseDate"];
     var checksum = json["sha512"];
@@ -80,7 +80,7 @@ class UpdateResult {
 
   Map<String, dynamic> toJson() => {
         "version": latestVersion.toString(),
-        "downloadUrl": downloadUrl,
+        "url": downloadUrl,
         "releaseNotes": releaseNotes,
         "releaseDate": releaseDate,
         "sha512": sha512
