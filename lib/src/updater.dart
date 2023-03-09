@@ -118,10 +118,10 @@ class UpdateResult {
       if (sha512.toString() == this.sha512) {
         controller.add(DownloadProgress.completedEvent(path));
       } else {
-        await _beginDownload(controller, path);
+        _beginDownload(controller, path);
       }
     } else {
-      await _beginDownload(controller, path);
+      _beginDownload(controller, path);
     }
     return controller;
   }
@@ -129,7 +129,7 @@ class UpdateResult {
   Future<void> _beginDownload(
       StreamController controller, FilePath path) async {
     var dio = Dio();
-    await dio.download(downloadUrl, path, onReceiveProgress: (received, total) {
+    dio.download(downloadUrl, path, onReceiveProgress: (received, total) {
       if (total != -1) {
         controller.add(DownloadProgress(received, total, path: path));
       }
