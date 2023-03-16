@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:app_installer/app_installer.dart';
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
@@ -153,9 +152,13 @@ class UpdateResult {
       await canLaunch(downloadUrl)
           ? await launch(downloadUrl)
           : throw Exception("Fail to launch App Store url");
-    } else if (Platform.isAndroid) {
-      await AppInstaller.installApk(uri);
-    } else if (Platform.isWindows) {
+    }
+    ///Play Store restrict permission "REQUEST_INSTALL_PACKAGES" that comes from package "app_installer"
+    ///we comment out this code for now because we just need the functionality only for Windows Platform
+    // else if (Platform.isAndroid) {
+    //   await AppInstaller.installApk(uri);
+    // }
+    else if (Platform.isWindows) {
       // Start the process using Windows shell instead of our parent process.
       // A detached process has no connection to its parent,
       // and can keep running on its own when the parent dies
